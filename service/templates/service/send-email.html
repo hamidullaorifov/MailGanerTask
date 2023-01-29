@@ -1,0 +1,15 @@
+{% extends 'service/base.html' %}
+{% block content %}
+<h1>Send Email Page</h1>
+<form action="" method="post">
+    {% csrf_token %}
+        <div class="form-group mb-2">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title">
+          <label for="emailtext">Message</label>
+          <textarea class="form-control" id="emailtext"  placeholder="Message" rows="5" name="message"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send</button>
+</form>
+{% endblock %}

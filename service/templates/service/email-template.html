@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="hidden" value="{{message_id}}" id="messageId">
+    <input type="hidden" value="{{receiver}}" id="email">
+    <p>Dear <strong>{{receiver}},</strong></p>
+    <p>{{message}}</p>
+    <p>Sender:<strong>{{sender}}</strong></p>
+
+<script>
+    function email_opened(){
+        host = "http://127.0.0.1:8000/";
+        messageId = document.getElementById("messageId").value;
+        email = document.getElementById("email").value;
+        console.log(messageId)
+        fetch(host+"email", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({'email':email,'id':messageId}),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', email_opened, false);
+</script>
+</body>
+</html>
